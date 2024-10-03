@@ -1,6 +1,6 @@
 # pre-reqer
 **For finding course info @ BU**
-[Download PKL File](https://drive.google.com/file/d/1j5x3z0w5zGzo_D1jMjOdnziRhQxyJEY5/view?usp=sharing)
+[Download PKL File](https://drive.google.com/file/d/1SWcJW0IXldnk658u8EoOuaJgOAxW6iCP/view?usp=drive_link)
 
   &darr; in [doc.ipynb](doc.ipynb)
  

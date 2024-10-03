@@ -257,7 +257,13 @@ class Course():
 
   def getDesc(self) -> str:
 
-    return self.webpage.find(id='course-content').p.text
+    if self.valid_link:
+
+      return self.webpage.find(id='course-content').p.text
+    
+    else:
+
+      return "Not valid url"
 
   def getHubs(self) -> list[str]:
 
@@ -378,7 +384,7 @@ class BUColleges():
 
   def __init__(self, college_name: str) -> None:
 
-    self.name: str = college_name
+    self.name: str = college_name if college_name not in college_codes else college_codes[college_name]
 
     pass
 

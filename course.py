@@ -39,7 +39,6 @@ class Course():
         "QST": "questrom"
     }
 
-
     self.link: str = link
 
     self.College, self.Department, self.Number, self.url, self.webpage = Course.getWebpage(name, link)
@@ -244,7 +243,13 @@ class Course():
 
   def getDesc(self) -> str:
 
-    return self.webpage.find(id='course-content').p.text
+    if self.valid_link:
+
+      return self.webpage.find(id='course-content').p.text
+    
+    else:
+
+      return "Not valid url"
 
   def getHubs(self) -> list[str]:
 
