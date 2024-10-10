@@ -163,7 +163,7 @@ class Course():
       try:
         page_text: str = self.getDesc()
       except AttributeError as ae:
-        return None
+        return {}
       except Exception as e:
         print(self.__repr__())
 
@@ -184,7 +184,7 @@ class Course():
 
     if len(order) == 0:
 
-      return None
+      return {}
 
     elif len(set(order)) != len(order):
 
@@ -249,7 +249,7 @@ class Course():
     
     else:
 
-      return "Not valid url"
+      return "Webpage not found"
 
   def getHubs(self) -> list[str]:
 
