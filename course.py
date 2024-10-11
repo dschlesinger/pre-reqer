@@ -250,6 +250,20 @@ class Course():
     else:
 
       return "Webpage not found"
+  
+  def getSemesters(self) -> list[str]:
+
+    course_list = self.webpage.find(class_='cf-course')
+
+    if course_list is not None:
+
+      semesters = list(set([sem.find('strong').text for sem in course_list.find_all('h4')]))
+
+    else:
+
+      return []
+
+    return semesters
 
   def getHubs(self) -> list[str]:
 
