@@ -257,7 +257,7 @@ class Course():
 
     if course_list is not None:
 
-      semesters = list(set([sem.find('strong').text for sem in course_list.find_all('h4')]))
+      semesters = list(set([re.match(r'[A-Za-z]+' ,sem.find('strong').text).group() for sem in course_list.find_all('h4')]))
 
     else:
 
