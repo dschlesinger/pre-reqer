@@ -23,6 +23,8 @@ all_colleges: list[str] = [
     "CFA"
 ]
 
+course_dir = {}
+
 class Course():
 
   def __init__(self, name: str, link: str = None, cd: dict[str, Any] = None):
@@ -269,11 +271,41 @@ class Course():
 
     try:
 
-      return [li.text for li in self.webpage.find('ul', class_="cf-hub-offerings").find_all('li')]
+      hubs_desc = re.search(r'BU Hub areas?: .+\.', self.getDesc())
 
-    except:
+      hubs_infobox = self.webpage.find('ul', class_="cf-hub-offerings")
+
+      if hubs_infobox is not None:
+
+        return [li.text for li in hubs_infobox.find_all('li')]
+      
+      elif hubs_desc is not None:
+
+        return [' '.join([word for word in c.split(' ') if word != '']) for c in (hubs_desc.group().split(':')[1].split('.')[0].split(', ') if hubs_desc else [])]
+
+      else:
+
+        return []
+
+    except Exception as e:
+
+      print(f'{Fore.RED}{e.__str__()}{Fore.WHITE}')
 
       return []
+
+  def getCredits(self) -> Union[int, None]:
+
+    info_box = self.webpage.find(id="info-box")
+
+    if 'Units' in info_box.text:
+
+      # does not support credits over 9 but I dont think those exist
+
+      return int(re.search(r'Units:\d', ''.join(info_box.text.split('\n'))).group()[-1])
+    
+    else:
+
+      return None
 
   def formatCourses(self, courses: list[str]) -> list[Any]:
 
@@ -355,3 +387,14 @@ class Course():
   def getName(c: str) -> str:
 
     return Course.getCourseNameStatic(Course.getWebpage(c)[-1])
+  
+if __name__ == '__main__':
+
+  save = {}
+
+  for c in ['HUB CC 127', 'CDS DS 380', 'SHA HF 329', 'HUB CC 193', 'CAS CC 101']: #
+    test = Course(c)
+
+    save[c] = test.getHubs()
+
+  print(*[f'{key}: {save[key]}' for key in save], sep='\n')
