@@ -1,14 +1,17 @@
 import requests
 
+import sys, os
+
 from bs4 import BeautifulSoup
 
 college_codes: dict[str, str] = {
-    "QST": "questrom"
+    "QST": "questrom",
+    "WED": "wheelock"
 }
 
 # All Colleges
 
-all_colleges: list[str] = [
+all_colleges: list[str] = sys.argv[1:] if sys.argv.__len__() > 1 else [
     "CAS",
     "COM",
     "ENG",
@@ -18,7 +21,8 @@ all_colleges: list[str] = [
     "SAR",
     "SHA",
     "CGS",
-    "CFA"
+    "CFA",
+    "WED"
 ]
 
 # completed_colleges: list[str] = all_colleges # [] 
@@ -408,6 +412,9 @@ class BUColleges():
 
       if not course_blurbs: # empty list
         print(f"{Fore.RED}Found No Courses: Last Page {i}{Fore.WHITE}")
+
+        saveCourses(0)
+
         break
 
       print(f"{Fore.CYAN}Searching {self.name} Page {i}{Fore.WHITE}")

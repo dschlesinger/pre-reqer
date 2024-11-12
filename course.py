@@ -297,7 +297,13 @@ class Course():
 
     info_box = self.webpage.find(id="info-box")
 
-    if 'Units' in info_box.text:
+    if info_box and 'Units' in info_box.text:
+
+      units = re.search(r'Units:\d', ''.join(info_box.text.split('\n')))
+                        
+      if units is None:
+
+        return None
 
       # does not support credits over 9 but I dont think those exist
 
