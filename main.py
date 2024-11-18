@@ -488,7 +488,7 @@ def saveCourses(i: int) -> None:
 
       if i % 100 == 0:
 
-        with open(f"saves/{save_file}_{len_dict}.pkl", 'wb') as file:
+        with open(f"{save_file}_{len_dict}.pkl", 'wb') as file:
           pickle.dump(course_dir, file)
 
       print(f"{Fore.LIGHTGREEN_EX}Save Sucsessful!{Fore.WHITE}")  
@@ -505,6 +505,12 @@ if __name__ == "__main__":
   read_file: str = "courses_directory" # "courses_directory"
   save_file: str = "saves/courses_directory_new"
 
+  # Creates saves folder if absent
+
+  if 'saves' not in os.listdir():
+
+    os.makedirs('saves')
+
   load_dict()
 
   last_save_len: int = len(course_dir)
@@ -513,3 +519,5 @@ if __name__ == "__main__":
   print(len(course_dir))
   save_branch = BUCourseBranch()
   print(save_branch)
+
+  

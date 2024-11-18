@@ -9,7 +9,7 @@
 ### To load pickle file
 
 ```py
-from main import Course
+from course import Course
 import pickle
 
 # Should take around a minute
